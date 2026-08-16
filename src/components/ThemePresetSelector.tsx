@@ -1,0 +1,2 @@
+import {presets} from '../utils/themePresets'
+export function ThemePresetSelector({active,onSelect}:{active:string;onSelect:(name:string)=>void}){return <div className="presets">{Object.entries(presets).map(([name,p])=><button title={`${name} theme`} className={active===name?'active':''} onClick={()=>onSelect(name)} key={name}><span style={{background:`linear-gradient(135deg,${p.foreground} 50%,${p.accent} 50%)`}}/>{name}</button>)}</div>}

@@ -1,0 +1,1 @@
+export function AppLayout({header,left,center,right}:{header:React.ReactNode;left:React.ReactNode;center:React.ReactNode;right:React.ReactNode}){return <div className="shell"><header>{header}</header><main><aside className="left-panel">{left}</aside><section className="center-panel">{center}</section><aside className="right-panel">{right}</aside></main></div>}

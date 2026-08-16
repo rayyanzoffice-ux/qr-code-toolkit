@@ -1,0 +1,2 @@
+import type { QROptions } from '../types'
+export const presets:Record<string,Pick<QROptions,'foreground'|'background'|'accent'|'pattern'>>={Classic:{foreground:'#111827',background:'#ffffff',accent:'#7c3aed',pattern:'square'},Neon:{foreground:'#cbff5e',background:'#07120f',accent:'#4dfbd2',pattern:'dots'},Minimal:{foreground:'#18181b',background:'#fafafa',accent:'#a1a1aa',pattern:'rounded'},Paper:{foreground:'#332b23',background:'#f6f0e4',accent:'#d97706',pattern:'rounded'},Cyber:{foreground:'#ec4899',background:'#09051d',accent:'#8b5cf6',pattern:'dots'}}

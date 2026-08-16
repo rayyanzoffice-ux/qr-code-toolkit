@@ -1,0 +1,1 @@
+export function AnimatedBackground(){return <div className="ambient" aria-hidden="true"><div className="grid"/><div className="orb one"/><div className="orb two"/><div className="scan-bg"/>{Array.from({length:18},(_,i)=><i key={i} style={{'--i':i} as React.CSSProperties}/>)}</div>}

@@ -1,0 +1,8 @@
+import {useEffect,useRef} from 'react'
+import {motion} from 'framer-motion'
+import QRCode from 'qrcode'
+import {QrCode} from 'lucide-react'
+import type {QROptions} from '../types'
+export function QRPreview({payload,options,error}:{payload:string;options:QROptions;error:string}){const ref=useRef<HTMLCanvasElement>(null)
+ useEffect(()=>{if(!payload||error)return;const id=requestAnimationFrame(()=>{const qr=QRCode.create(payload,{errorCorrectionLevel:options.level});const canvas=ref.current;if(!canvas)return;const ctx=canvas.getContext('2d');if(!ctx)return;const cells=qr.modules.size,px=Math.max(1,Math.floor((options.size-options.margin*2*8)/cells)),actual=px*cells+options.margin*2*px;canvas.width=canvas.height=actual;ctx.fillStyle=options.background;ctx.fillRect(0,0,actual,actual);ctx.fillStyle=options.foreground;const radius=options.pattern==='rounded'?px*.35:options.pattern==='dots'?px*.48:0;for(let r=0;r<cells;r++)for(let c=0;c<cells;c++)if(qr.modules.get(r,c)){const x=(c+options.margin)*px,y=(r+options.margin)*px;if(radius){ctx.beginPath();ctx.roundRect(x+.08*px,y+.08*px,px*.84,px*.84,radius);ctx.fill()}else ctx.fillRect(x,y,px,px)}});return()=>cancelAnimationFrame(id)},[payload,options,error])
+ return <motion.div className="qr-stage" style={{'--accent':options.accent} as React.CSSProperties} whileHover={{rotateX:2,rotateY:-2,scale:1.01}}><div className="corner tl"/><div className="corner br"/>{error||!payload?<div className="empty"><QrCode size={54}/><p>Your QR preview will appear here</p></div>:<motion.canvas key={payload+JSON.stringify(options)} initial={{opacity:.5,scale:.96}} animate={{opacity:1,scale:1}} ref={ref}/>} {!error&&payload&&<div className="scan"/>}</motion.div>}
